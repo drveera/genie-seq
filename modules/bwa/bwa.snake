@@ -1,0 +1,28 @@
+#!/bin/env snakemake
+
+sys.path.insert(1, sys.path[0] + '/../../../library')
+from md import process_list
+
+#####SYSTEME PARAMS######
+pfix = config["pfix_bwa"]
+outfolder = config['--outfolder']
+
+########USER PARAMS##################
+bwa_ref = config['--ref-genome']
+
+#################WILDCARD##########
+bwa_fq = config['--fqlist']
+bwa_fq = process_list(bwa_fq)
+outfile = f"{pfix}_{{fastq}}"
+outfile_base = f"{pfix}_{{fastq}}"
+###################################
+
+
+rule gseq_bwa_all:
+    input:
+
+rule gseq_bwa_aln:
+    input:
+    output:
+    shell:
+        "bwa aln -t 4 {bwa_ref} {read1} > "
