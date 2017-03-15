@@ -5,8 +5,8 @@ infile = "{wcard}.sam"
 outfile_a = "{wcard}.dedup.bam"
 outfile_b = "{wcard}.dedup.bai"
 
-infile_cleaned = "{wcard}.cleaned.sam"
-infile_sorted = "{wcard}.cleaned.sorted.sam"
+infile_cleaned = "{wcard}.cleanedSam"
+infile_sorted = "{wcard}.cleanedSortedSam"
 
 temp_dir = "~/faststorage/.temp"
 

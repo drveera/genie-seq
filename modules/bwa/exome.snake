@@ -1,2 +1,3 @@
 include: "bwa.snake"
 include: "picard.snake"
+include: "gatk_pre.snake"

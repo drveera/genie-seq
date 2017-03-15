@@ -34,4 +34,5 @@ rule gseq_bwa_align:
     input: a = sai1, b= sai2, c = fq1, d = fq2, r = bwa_ref
     params: bwa_ref
     output: outfile            
-    shell: "bwa sampe {params} {input.a} {input.b}  {input.c} {input.d} > {output}"
+    shell: "bwa sampe -r '@RG\tID:{wildcards.wcard}\tSM:{wildcards.wcard}\tPL:ILLUMINA\tLB:iPsych' "
+           "{params} {input.a} {input.b}  {input.c} {input.d} > {output}"

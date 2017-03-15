@@ -1,1 +1,0 @@
-samtools sort cigar-test.inter.bam cigar-test
