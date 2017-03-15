@@ -1,0 +1,1 @@
+samtools mpileup -u -f /home/veera/faststorage/resources/reference_genome/human.b37.fasta cigar-test.bam > cigar-test.bcf

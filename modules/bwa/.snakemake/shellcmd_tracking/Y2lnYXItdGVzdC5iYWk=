@@ -1,0 +1,1 @@
+samtools index cigar-test.bam cigar-test.bai

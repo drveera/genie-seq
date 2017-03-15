@@ -1,0 +1,1 @@
+bwa aln -t 4 /home/veera/faststorage/resources/reference_genome/human.b37.fasta cigar-test.fq2 > cigar-test.fq2.sai

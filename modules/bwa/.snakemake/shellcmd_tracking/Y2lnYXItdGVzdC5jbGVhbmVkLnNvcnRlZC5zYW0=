@@ -1,0 +1,1 @@
+picard SortSam INPUT=cigar-test.cleaned.sam OUTPUT=cigar-test.cleaned.sorted.sam SORT_ORDER=coordinate TMP_DIR=~/faststorage/.temp

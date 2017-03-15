@@ -1,28 +1,37 @@
 #!/bin/env snakemake
 
-sys.path.insert(1, sys.path[0] + '/../../../library')
-from md import process_list
-
-#####SYSTEME PARAMS######
-pfix = config["pfix_bwa"]
-outfolder = config['--outfolder']
-
 ########USER PARAMS##################
-bwa_ref = config['--ref-genome']
+#bwa_ref = config['--ref-genome']
+bwa_ref = '/home/veera/faststorage/resources/reference_genome/human.b37.fasta'
 
 #################WILDCARD##########
-bwa_fq = config['--fqlist']
-bwa_fq = process_list(bwa_fq)
-outfile = f"{pfix}_{{fastq}}"
-outfile_base = f"{pfix}_{{fastq}}"
-###################################
+#bwa_fq = config['--fqlist']
+#bwa_fq = process_list(bwa_fq)
+bwa_fq = ["file"]
 
+outfile = "{wcard}.sam"
+outfile_base = "{wcard}"
+###################################
+fq1 = "{wcard}.fq1"
+fq2 = "{wcard}.fq2"
+sai1 = "{wcard}.fq1.sai"
+sai2 = "{wcard}.fq2.sai"
 
 rule gseq_bwa_all:
-    input:
+    input: expand(outfile, wcard = bwa_fq)
 
-rule gseq_bwa_aln:
-    input:
-    output:
-    shell:
-        "bwa aln -t 4 {bwa_ref} {read1} > "
+rule gseq_bwa_aln_read1:
+    input: a = fq1, r = bwa_ref
+    output:temp(sai1)
+    params: bwa_ref
+    shell: "bwa aln -t 4 {input.r} {input.a} > {output}"
+rule gseq_bwa_aln_read2:
+    input: b = fq2, r = bwa_ref
+    output: temp(sai2)
+    shell: "bwa aln -t 4 {input.r} {input.b} > {output}"
+
+rule gseq_bwa_align:
+    input: a = sai1, b= sai2, c = fq1, d = fq2, r = bwa_ref
+    params: bwa_ref
+    output: outfile            
+    shell: "bwa sampe {params} {input.a} {input.b}  {input.c} {input.d} > {output}"

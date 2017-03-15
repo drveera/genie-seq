@@ -1,0 +1,1 @@
+samtools view -b -S -o cigar-test.inter.bam cigar-test.sam
